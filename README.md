@@ -1,6 +1,6 @@
 # Vow
 
-Vow is a Chrome Manifest V3 extension that detects media URLs from the active tab without using an external server, telemetry, or analytics. It observes normal HTTP(S) requests and displays video, audio, and subtitle links in the popup.
+Vow is a Chrome Manifest V3 extension that detects video, audio, and subtitle media requests from the active tab. It works locally and does not use an external server, analytics, or telemetry.
 
 ## Project structure
 
@@ -13,35 +13,53 @@ Vow/
 ├─ popup.css
 ├─ popup.js
 ├─ icons/
+│  ├─ icon-16x16.png
+│  ├─ icon-32x32.png
+│  ├─ icon-192x192.png
+│  └─ icon-512x512.png
 ├─ README.md
 └─ AGENTS.md
 ```
 
+The previously created landing page is not part of the current project.
+
 ## Features
 
-- Video: HLS/M3U8 master and media playlist requests.
-- Audio: Audio-only playlists, audio/sound/aac/m4a/mp3 signals, and relevant Content-Type values.
-- Subtitles: `.vtt`, `.srt`, `.ass`, `.ssa`, subtitle playlists, and subtitle/caption/cc/text signals.
-- File extensions are not used alone; URL path/query, Content-Type, and request context are evaluated together.
-- Language is shown when detected from the URL or query; otherwise `Unknown` is displayed.
-- Results are grouped into Video, Audio, and Subtitles for the active tab.
-- The same full URL is not added twice for the same tab.
-- New media requests appear automatically while the popup is open.
-- Includes Copy, Open in new tab, Clear, and Reload active page actions.
+- Detects HLS/M3U8 master and media playlists.
+- Detects audio-only playlists and audio-related requests.
+- Detects `.vtt`, `.srt`, `.ass`, `.ssa`, and subtitle playlist requests.
+- Uses URL path/query, Content-Type, request type, and request context together instead of relying only on file extensions.
+- Classifies results as Video, Audio, or Subtitles.
+- Attempts to identify language from URL signals; displays `Unknown` when unavailable.
+- Shows the full URL without trimming query strings or tokens.
+- Prevents duplicate URLs per tab.
+- Associates results with the active tab.
+- Updates the popup when new requests arrive during playback.
+- Provides Copy, Open in new tab, Clear, and Reload active page actions.
+- Uses the PNG assets in `icons/` for the extension icon.
 
 ## Manifest V3 permissions
 
-- `webRequest`: Observing request URLs and response headers.
-- `tabs`: Reading the active tab ID and title, associating results with the tab, and reloading the page.
-- `storage`: Persisting results across service worker restarts and sharing them with the popup.
-- `host_permissions: ["<all_urls>"]`: Observing HTTP(S) media requests on visited websites.
+- `webRequest`: Observes request URLs and response headers.
+- `tabs`: Reads the active tab ID/title and reloads the active page.
+- `storage`: Persists results and shares them between the service worker and popup.
+- `host_permissions: ["<all_urls>"]`: Allows observation of HTTP(S) requests on visited sites.
 
-Vow uses `webRequest` for observation only. It does not block or modify requests and does not read response bodies. If response headers are unavailable, URL and request-context signals are still used.
+Vow uses `webRequest` for observation only. It does not block or modify requests and does not read response bodies. If response headers are unavailable, URL and request-context signals remain available.
 
 ## Security and scope
 
-The extension does not decrypt DRM, extract license keys, break encryption, or bypass access controls. It only classifies media and subtitle HTTP(S) requests normally made by the browser. No external server, analytics, or telemetry is used.
+Vow does not decrypt DRM, extract license keys, break encryption, or bypass access controls. It only classifies media and subtitle HTTP(S) requests normally made by the browser.
 
 ## Installation
 
-Open `chrome://extensions` → enable Developer mode → choose `Load unpacked` → select the `Vow` folder. Reload the extension from the extensions page after changing icons or extension files.
+1. Open `chrome://extensions`.
+2. Enable Developer mode.
+3. Select `Load unpacked`.
+4. Choose the Vow project folder.
+
+Reload the extension from the extensions page after changing source files or icons.
+
+## GitHub
+
+Repository: <https://github.com/cmehmetd/vow>
