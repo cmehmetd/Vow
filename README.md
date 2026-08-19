@@ -13,7 +13,6 @@ Vow/
 ├─ popup.css
 ├─ popup.js
 ├─ icons/
-├─ landing/
 ├─ README.md
 └─ AGENTS.md
 ```
