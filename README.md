@@ -59,7 +59,3 @@ Vow does not decrypt DRM, extract license keys, break encryption, or bypass acce
 4. Choose the Vow project folder.
 
 Reload the extension from the extensions page after changing source files or icons.
-
-## GitHub
-
-Repository: <https://github.com/cmehmetd/vow>
