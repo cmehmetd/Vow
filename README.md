@@ -48,5 +48,3 @@ Vow, DRM şifresini çözmez, lisans anahtarlarını çıkarmaz, şifrelemeyi k�
 2. Geliştirici Modu'nu etkinleştirin.
 3. `Paketlenmemiş Öğe Yükle` Butonuna tıklayın.
 4. Eklenti klasörünü seçin..
-
-Reload the extension from the extensions page after changing source files or icons.
